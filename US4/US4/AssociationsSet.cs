@@ -12,6 +12,7 @@ using System.IO;
 
 namespace US4
 {
+    
     public partial class AssociationsSet : Form
     {
         private string codeLine;
@@ -19,7 +20,7 @@ namespace US4
         private Point currentWordLocation;
         private string[] wordTypes= { "Variable declaration", "Function declaration", "Variable modificator", "Function modificator", "Content reference", "Operator", "Name" };
         //private ToolStripComboBox wordTypeSelector = new ToolStripComboBox();
-        
+        private Font codeLineLabels;
 
 
 
@@ -32,7 +33,7 @@ namespace US4
             
             InitializeComponent();
 
-
+            codeLineLabels = new Font("Microsoft Sans Serif",15);
             CodeLine.Text = codeLine;
             this.codeLine = codeLine;
             //wordTypeSelector.Items.AddRange(wordTypes);
@@ -54,8 +55,10 @@ namespace US4
                 wordTypeSelector.Name = "wordTypeSelector_" + i;
                 wordTypeSelector.Items.AddRange(wordTypes);
                 tmpLabel.ContextMenuStrip.Items.Add(wordTypeSelector);
+                tmpLabel.Font = codeLineLabels;
+                tmpLabel.AutoSize = true;
                 tmpLabel.Name = "Label_" + i;
-                ((ToolStripComboBox)(tmpLabel.ContextMenuStrip.Items.Find("wordTypeSelector",true).First())).SelectedIndexChanged += ChangeFontColor;
+                ((ToolStripComboBox)(tmpLabel.ContextMenuStrip.Items.Find("wordTypeSelector_"+i,true).First())).SelectedIndexChanged += ChangeFontColor;
                 tmpLabel.Text = codeLine.Split(' ').ToArray()[i];
                 if (i > 0)
                 {
@@ -69,29 +72,29 @@ namespace US4
         }
         private void ChangeFontColor(object sender, EventArgs e)
         {
-            if(sender)
-            string currentIndex = ((Label)sender).Name.Split('_').Last();
-            if(((Label)sender).ContextMenuStrip.Items.Find("wordTypeSelector", true).Count()>0)
+            if (((ToolStripComboBox)sender) != null)
             {
-                switch(((ToolStripComboBox)((Label)sender).ContextMenuStrip.Items.Find("wordTypeSelector",true).First()).SelectedItem)
+                string currentIndex = ((ToolStripComboBox)sender).Name.Split('_').Last();
+
+                switch (((ToolStripComboBox)sender).SelectedItem.ToString())
                 {
                     case "Variable declaration":
-                        ((Label)sender).ForeColor = Color.Blue;
+                        this.Controls.Find("Label_"+currentIndex, false).First().ForeColor = Color.Blue;
                         break;
                     case "Function declaration":
-                        ((Label)sender).ForeColor = Color.Purple;
+                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Purple;
                         break;
                     case "Variable modificator":
-                        ((Label)sender).ForeColor = Color.Pink;
+                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Pink;
                         break;
                     case "Function modificator":
-                        ((Label)sender).ForeColor = Color.Peru;
+                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Peru;
                         break;
                     case "Content reference":
-                        ((Label)sender).ForeColor = Color.Red;
+                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Red;
                         break;
                     case "Operator":
-                        ((Label)sender).ForeColor = Color.PowderBlue;
+                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.PowderBlue;
                         break;
                     case "Name":
                         break;
