@@ -1,2 +1,2 @@
 # US4
-Converter
+UE3 to UE4 project converter (UnrealScript, Level)
