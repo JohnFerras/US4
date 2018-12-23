@@ -10,7 +10,7 @@ namespace US4
 {
     class MainWorker
     {
-        public struct associationsStruct
+        private struct associationsStruct
         {
             string includeLibrary;
             string type;
@@ -18,13 +18,14 @@ namespace US4
             string _CPP_Association;
             string isChildOf;
         };
-        public StreamReader inputDocument;
-        public StreamWriter outputDocumentH;
-        public StreamWriter outputDocumentCpp;
+        private StreamReader inputDocument;
+        private StreamWriter outputDocumentH;
+        private StreamWriter outputDocumentCpp;
         //public OpenFileDialog openFileDialog;
 
-        public XMLRequests _XMLRequests = new XMLRequests();
-        public XDocument _XMLAssociations;
+        private XMLRequests _XMLRequests = new XMLRequests();
+        private XDocument _XMLAssociations;
+        private string currentLine;
 
         public void OpenFile(string fileName)
         {
@@ -45,13 +46,55 @@ namespace US4
             {
                 _XMLAssociations = new XDocument();
                 _XMLAssociations.Add(_XMLRequests.F_newXElement("Root"));
-                _XMLAssociations.Root.Add(_XMLRequests.F_newXElement("Variables"));
-                _XMLAssociations.Root.Add(_XMLRequests.F_newXElement("Functions"));
-                _XMLAssociations.Root.Add(_XMLRequests.F_newXElement("Delegates"));
                 _XMLAssociations.Save("XMLAssociations.xml");
             }
+            CodeReading();
 
 
+
+        }
+        private void CodeReading()
+        {
+            if ((currentLine = inputDocument.ReadLine()) != null)
+            {
+                LineAnalys(currentLine);
+            }
+
+        }
+        private void LineAnalys(string line)
+        {
+            string[] tmpStringArray = line.Split(' ');
+            string tmpString;
+            bool findedInAssociations=false;
+            for(int i = 0;i<tmpStringArray.Length;i++)
+            {
+                tmpString = tmpStringArray[0];
+                if (i > 0)
+                {
+                    for (int k = 0; k< i; k++)
+                    {
+                        tmpString += tmpStringArray[k];
+                    }
+                }
+                foreach(XElement xElem in _XMLAssociations.Root.Elements())
+                {
+                    if (xElem.Attributes("inText").Count()>0)
+                    {                        
+                        if (xElem.Attribute("inText").Value == tmpString)
+                        {
+                            findedInAssociations = true;
+                        }
+                    }
+                }
+            }
+            if (!findedInAssociations)
+            {
+                AssociationsSet associationsSet = new AssociationsSet(inputDocument, line);
+                associationsSet.ShowDialog();
+            }
+        }
+        private void writeCode(string codeLine)
+        {
 
         }
     }
