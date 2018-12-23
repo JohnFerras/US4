@@ -6,18 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
 
-namespace CodeConverter_Console
+namespace US4
 {
-    class Program
-    {      
-        static void Main(string[] args)
-        {
-            MainWorkClass mwc = new MainWorkClass();
-            Console.WriteLine("Select file");
-            mwc.OpenFile("PKPawn.uc");
-        }
-    }
-    class MainWorkClass
+    class MainWorker
     {
         public struct associationsStruct
         {
@@ -31,9 +22,10 @@ namespace CodeConverter_Console
         public StreamWriter outputDocumentH;
         public StreamWriter outputDocumentCpp;
         //public OpenFileDialog openFileDialog;
-        
+
         public XMLRequests _XMLRequests = new XMLRequests();
         public XDocument _XMLAssociations;
+
         public void OpenFile(string fileName)
         {
             //openFileDialog.Filter = "uc files (*.uc)|*.txt|All files (*.*)|*.*";
@@ -42,10 +34,10 @@ namespace CodeConverter_Console
             /*if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
             }*/
-                inputDocument = new StreamReader(fileName);
-                outputDocumentCpp = new StreamWriter(fileName.Split('.').First() + ".cpp");
-                outputDocumentH = new StreamWriter(fileName.Split('.').First() + ".h");
-            if(_XMLRequests.LoadXMLDocument("XMLAssociations.xml")!=null)
+            inputDocument = new StreamReader(fileName);
+            outputDocumentCpp = new StreamWriter(fileName.Split('.').First() + ".cpp");
+            outputDocumentH = new StreamWriter(fileName.Split('.').First() + ".h");
+            if (_XMLRequests.LoadXMLDocument("XMLAssociations.xml") != null)
             {
                 _XMLAssociations = _XMLRequests.LoadXMLDocument("XMLAssociations.xml");
             }
@@ -60,7 +52,7 @@ namespace CodeConverter_Console
             }
 
 
-            
+
         }
     }
 }

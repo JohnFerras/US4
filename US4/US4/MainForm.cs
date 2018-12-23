@@ -37,6 +37,9 @@ namespace US4
 
         public void GameplayConvert()
         {
+            MainWorker newWorker = new MainWorker();
+
+            newWorker.OpenFile("PKPawn.uc");
 
         }
 
