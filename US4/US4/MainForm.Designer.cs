@@ -37,13 +37,13 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_StartConvert = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lbl_UdkPath = new System.Windows.Forms.Label();
-            this.txtBox_UE3Path = new System.Windows.Forms.TextBox();
-            this.btn_SelectUDKPath = new System.Windows.Forms.Button();
-            this.UDKPathBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.btn_SelectUE4Path = new System.Windows.Forms.Button();
             this.txtBox_UE4Path = new System.Windows.Forms.TextBox();
             this.lbl_UE4Path = new System.Windows.Forms.Label();
+            this.btn_SelectUDKPath = new System.Windows.Forms.Button();
+            this.txtBox_UE3Path = new System.Windows.Forms.TextBox();
+            this.lbl_UdkPath = new System.Windows.Forms.Label();
+            this.UDKPathBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.UE4PathBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -65,6 +65,7 @@
             // rb_MigrateContent
             // 
             this.rb_MigrateContent.AutoSize = true;
+            this.rb_MigrateContent.Enabled = false;
             this.rb_MigrateContent.Location = new System.Drawing.Point(7, 66);
             this.rb_MigrateContent.Name = "rb_MigrateContent";
             this.rb_MigrateContent.Size = new System.Drawing.Size(108, 17);
@@ -87,6 +88,7 @@
             // rb_LevelConvert
             // 
             this.rb_LevelConvert.AutoSize = true;
+            this.rb_LevelConvert.Enabled = false;
             this.rb_LevelConvert.Location = new System.Drawing.Point(7, 20);
             this.rb_LevelConvert.Name = "rb_LevelConvert";
             this.rb_LevelConvert.Size = new System.Drawing.Size(100, 17);
@@ -144,34 +146,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Converter Setup";
             // 
-            // lbl_UdkPath
-            // 
-            this.lbl_UdkPath.AutoSize = true;
-            this.lbl_UdkPath.Location = new System.Drawing.Point(7, 20);
-            this.lbl_UdkPath.Name = "lbl_UdkPath";
-            this.lbl_UdkPath.Size = new System.Drawing.Size(55, 13);
-            this.lbl_UdkPath.TabIndex = 0;
-            this.lbl_UdkPath.Text = "UDKPath:";
-            // 
-            // txtBox_UE3Path
-            // 
-            this.txtBox_UE3Path.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.txtBox_UE3Path.Location = new System.Drawing.Point(68, 17);
-            this.txtBox_UE3Path.Name = "txtBox_UE3Path";
-            this.txtBox_UE3Path.Size = new System.Drawing.Size(194, 20);
-            this.txtBox_UE3Path.TabIndex = 1;
-            this.txtBox_UE3Path.Text = "F:/build_ue3";
-            // 
-            // btn_SelectUDKPath
-            // 
-            this.btn_SelectUDKPath.Location = new System.Drawing.Point(268, 14);
-            this.btn_SelectUDKPath.Name = "btn_SelectUDKPath";
-            this.btn_SelectUDKPath.Size = new System.Drawing.Size(75, 23);
-            this.btn_SelectUDKPath.TabIndex = 2;
-            this.btn_SelectUDKPath.Text = "Select";
-            this.btn_SelectUDKPath.UseVisualStyleBackColor = true;
-            this.btn_SelectUDKPath.Click += new System.EventHandler(this.btn_SelectUDKPath_Click);
-            // 
             // btn_SelectUE4Path
             // 
             this.btn_SelectUE4Path.Location = new System.Drawing.Point(268, 43);
@@ -199,6 +173,34 @@
             this.lbl_UE4Path.Size = new System.Drawing.Size(53, 13);
             this.lbl_UE4Path.TabIndex = 3;
             this.lbl_UE4Path.Text = "UE4Path:";
+            // 
+            // btn_SelectUDKPath
+            // 
+            this.btn_SelectUDKPath.Location = new System.Drawing.Point(268, 14);
+            this.btn_SelectUDKPath.Name = "btn_SelectUDKPath";
+            this.btn_SelectUDKPath.Size = new System.Drawing.Size(75, 23);
+            this.btn_SelectUDKPath.TabIndex = 2;
+            this.btn_SelectUDKPath.Text = "Select";
+            this.btn_SelectUDKPath.UseVisualStyleBackColor = true;
+            this.btn_SelectUDKPath.Click += new System.EventHandler(this.btn_SelectUDKPath_Click);
+            // 
+            // txtBox_UE3Path
+            // 
+            this.txtBox_UE3Path.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtBox_UE3Path.Location = new System.Drawing.Point(68, 17);
+            this.txtBox_UE3Path.Name = "txtBox_UE3Path";
+            this.txtBox_UE3Path.Size = new System.Drawing.Size(194, 20);
+            this.txtBox_UE3Path.TabIndex = 1;
+            this.txtBox_UE3Path.Text = "F:/build_ue3";
+            // 
+            // lbl_UdkPath
+            // 
+            this.lbl_UdkPath.AutoSize = true;
+            this.lbl_UdkPath.Location = new System.Drawing.Point(7, 20);
+            this.lbl_UdkPath.Name = "lbl_UdkPath";
+            this.lbl_UdkPath.Size = new System.Drawing.Size(55, 13);
+            this.lbl_UdkPath.TabIndex = 0;
+            this.lbl_UdkPath.Text = "UDKPath:";
             // 
             // MainForm
             // 
