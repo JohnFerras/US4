@@ -52,6 +52,9 @@
     <Compile Include="AssociationsSet.Designer.cs">
       <DependentUpon>AssociationsSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\ControlLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
