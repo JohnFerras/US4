@@ -49,6 +49,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // AssociationsSet
             // 
@@ -60,6 +61,7 @@
             this.Controls.Add(this.CodeLine);
             this.Name = "AssociationsSet";
             this.Text = "AssociationsSet";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AssociationsSet_FormClosing);
             this.Load += new System.EventHandler(this.AssociationsSet_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

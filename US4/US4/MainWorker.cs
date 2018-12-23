@@ -14,8 +14,9 @@ namespace US4
         {
             string includeLibrary;
             string type;
-            List<string> _US_Names;
+            string _US_Names;
             string _CPP_Association;
+            bool inHeader;
             string isChildOf;
         };
         private StreamReader inputDocument;
@@ -26,6 +27,7 @@ namespace US4
         private XMLRequests _XMLRequests = new XMLRequests();
         private XDocument _XMLAssociations;
         private string currentLine;
+        private AssociationsSet associationsSet;
 
         public void OpenFile(string fileName)
         {
@@ -89,11 +91,13 @@ namespace US4
             }
             if (!findedInAssociations)
             {
-                AssociationsSet associationsSet = new AssociationsSet(inputDocument, line);
+                associationsSet = new AssociationsSet(inputDocument, line);
                 associationsSet.ShowDialog();
+                associationsSet.FormClosing += GetTypesCode;
+
             }
         }
-        private void writeCode(string codeLine)
+        private void GetTypesCode(Object sender, EventArgs e)
         {
 
         }

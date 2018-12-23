@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace US4
 {
 
-    class ControlLabel : Label
+    public class ControlLabel : Label
     {
         public string currentType;
         private string[] wordTypes = { "Variable declaration", "Function declaration", "Variable modificator", "Function modificator", "Content reference", "Operator", "Name" };
