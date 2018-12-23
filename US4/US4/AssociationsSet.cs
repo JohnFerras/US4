@@ -69,7 +69,7 @@ namespace US4
             foreach (ControlLabel cl in associationTypesLabels)
             {
                 tmpAssociationStruct = new associationsStruct();
-                associationsList.Add(); 
+                //associationsList.Add(); 
             }
         }
 
@@ -78,22 +78,62 @@ namespace US4
             this.Close();
         }
     }
-    public class associationsStruct
+    public struct associationsStruct
     {
-        string includeLibrary;
-        string type;
-        string _US_Names;
-        string _CPP_Association;
-        string inHeader;
-        string isChildOf;
-        associationsStruct(string includeLibrary, string type, string _US_Names, string _CPP_Association, string inHeader, string isChildOf)
+        private string includeLibrary;
+        public string IncludeLibrary
         {
-            this.includeLibrary = includeLibrary;
-            this.type = type;
-            this._US_Names = _US_Names;
-            this._CPP_Association = _CPP_Association;
-            this.inHeader = inHeader;
-            this.isChildOf = isChildOf;
+            get { return includeLibrary; }
+            set { includeLibrary = value; }
         }
+
+        private string type;
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        private string _US_Names;
+        public string US_Names
+        {
+            get { return _US_Names; }
+            set { _US_Names = value; }
+        }
+
+        private string _CPP_Association;
+        public string CPP_Association
+        {
+            get { return _CPP_Association; }
+            set { _CPP_Association = value; }
+        }
+
+        private string inHeader;
+        public string InHeader
+        {
+            get { return inHeader; }
+            set { inHeader = value; }
+        }
+
+        private string isChildOf;
+        public string IsChildOf
+        {
+            get { return isChildOf; }
+            set { isChildOf = value; }
+        }
+
+
+
+        public associationsStruct(string _includeLibrary, string _type, string __US_Names, string __CPP_Association, string _inHeader, string _isChildOf)
+       {
+            includeLibrary = _includeLibrary;
+            type = _type;
+            _US_Names = __US_Names;
+            _CPP_Association = __CPP_Association;
+            inHeader = _inHeader;
+            isChildOf = _isChildOf;
+
+            
+       }
     };
 }
