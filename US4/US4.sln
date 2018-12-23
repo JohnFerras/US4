@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "US4", "US4\US4.csproj", "{58BAF786-B1AD-41DC-91B5-AA9E14F35B31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeConverter_Console", "CodeConverter_Console\CodeConverter_Console.csproj", "{8C73DB0F-1C72-45CF-9B5E-E845FA581C74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{58BAF786-B1AD-41DC-91B5-AA9E14F35B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58BAF786-B1AD-41DC-91B5-AA9E14F35B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58BAF786-B1AD-41DC-91B5-AA9E14F35B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C73DB0F-1C72-45CF-9B5E-E845FA581C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C73DB0F-1C72-45CF-9B5E-E845FA581C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C73DB0F-1C72-45CF-9B5E-E845FA581C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C73DB0F-1C72-45CF-9B5E-E845FA581C74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74AD3B1A-B073-48AB-9170-9F15FD8847FD}
 	EndGlobalSection
 EndGlobal
