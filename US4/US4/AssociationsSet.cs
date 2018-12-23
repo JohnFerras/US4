@@ -48,17 +48,13 @@ namespace US4
             
             for (int i = 0; i < codeLine.Split(' ').ToArray().Length; i++)
             {
-                Label tmpLabel = new Label();
+                ControlLabel tmpLabel = new ControlLabel();
                 tmpLabel.ContextMenuStrip = new ContextMenuStrip();// contextMenuStrip1;
                 
                 ToolStripComboBox wordTypeSelector = new ToolStripComboBox();
-                wordTypeSelector.Name = "wordTypeSelector_" + i;
-                wordTypeSelector.Items.AddRange(wordTypes);
-                tmpLabel.ContextMenuStrip.Items.Add(wordTypeSelector);
                 tmpLabel.Font = codeLineLabels;
                 tmpLabel.AutoSize = true;
                 tmpLabel.Name = "Label_" + i;
-                ((ToolStripComboBox)(tmpLabel.ContextMenuStrip.Items.Find("wordTypeSelector_"+i,true).First())).SelectedIndexChanged += ChangeFontColor;
                 tmpLabel.Text = codeLine.Split(' ').ToArray()[i];
                 if (i > 0)
                 {
@@ -70,37 +66,6 @@ namespace US4
                 
             }
         }
-        private void ChangeFontColor(object sender, EventArgs e)
-        {
-            if (((ToolStripComboBox)sender) != null)
-            {
-                string currentIndex = ((ToolStripComboBox)sender).Name.Split('_').Last();
-
-                switch (((ToolStripComboBox)sender).SelectedItem.ToString())
-                {
-                    case "Variable declaration":
-                        this.Controls.Find("Label_"+currentIndex, false).First().ForeColor = Color.Blue;
-                        break;
-                    case "Function declaration":
-                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Purple;
-                        break;
-                    case "Variable modificator":
-                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Pink;
-                        break;
-                    case "Function modificator":
-                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Peru;
-                        break;
-                    case "Content reference":
-                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.Red;
-                        break;
-                    case "Operator":
-                        this.Controls.Find("Label_" + currentIndex, false).First().ForeColor = Color.PowderBlue;
-                        break;
-                    case "Name":
-                        break;
-                }
-
-            }
-        }
+        
     }
 }
