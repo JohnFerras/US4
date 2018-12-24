@@ -10,15 +10,7 @@ namespace US4
 {
     class MainWorker
     {
-        private struct associationsStruct
-        {
-            string includeLibrary;
-            string type;
-            string _US_Names;
-            string _CPP_Association;
-            bool inHeader;
-            string isChildOf;
-        };
+        private List<AssociationsStruct> associationsList = new List<AssociationsStruct>();
         private StreamReader inputDocument;
         private StreamWriter outputDocumentH;
         private StreamWriter outputDocumentCpp;
@@ -26,6 +18,7 @@ namespace US4
 
         private XMLRequests _XMLRequests = new XMLRequests();
         private XDocument _XMLAssociations;
+        private XElement tmpXElement;
         private string currentLine;
         private AssociationsSet associationsSet;
 
@@ -67,21 +60,21 @@ namespace US4
         {
             string[] tmpStringArray = line.Split(' ');
             string tmpString;
-            bool findedInAssociations=false;
-            for(int i = 0;i<tmpStringArray.Length;i++)
+            bool findedInAssociations = false;
+            for (int i = 0; i < tmpStringArray.Length; i++)
             {
                 tmpString = tmpStringArray[0];
                 if (i > 0)
                 {
-                    for (int k = 0; k< i; k++)
+                    for (int k = 0; k < i; k++)
                     {
                         tmpString += tmpStringArray[k];
                     }
                 }
-                foreach(XElement xElem in _XMLAssociations.Root.Elements())
+                foreach (XElement xElem in _XMLAssociations.Root.Elements())
                 {
-                    if (xElem.Attributes("inText").Count()>0)
-                    {                        
+                    if (xElem.Attributes("inText").Count() > 0)
+                    {
                         if (xElem.Attribute("inText").Value == tmpString)
                         {
                             findedInAssociations = true;
@@ -92,14 +85,30 @@ namespace US4
             if (!findedInAssociations)
             {
                 associationsSet = new AssociationsSet(inputDocument, line);
+                associationsSet.FormClosed += GetTypesCode;
                 associationsSet.ShowDialog();
-                associationsSet.FormClosing += GetTypesCode;
 
             }
         }
         private void GetTypesCode(Object sender, EventArgs e)
         {
+            associationsList.Clear();
+            associationsList = associationsSet.associationsList;
+            WriteInDictionary();
+        }
+        private void WriteInDictionary()
+        {
+            foreach (AssociationsStruct aStruct in associationsList)
+            {
+                tmpXElement = _XMLRequests.F_newXElement("DictionaryElem", new Dictionary<string, string>() { { "includeLibrary", aStruct.IncludeLibrary },
+                                                                                                              { "type", aStruct.Type},
+                                                                                                              { "_US_Name", aStruct.US_Name},
+                                                                                                              { "_CPP_Association", aStruct.CPP_Association},
+                                                                                                              { "inHeader", aStruct.InHeader} });
+            }
+
 
         }
     }
 }
+

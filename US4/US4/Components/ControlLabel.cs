@@ -12,16 +12,19 @@ namespace US4
 {
 
     public class ControlLabel : Label
-    {
-        public string currentType;
-        private string[] wordTypes = { "Variable declaration", "Function declaration", "Variable modificator", "Function modificator", "Content reference", "Operator", "Name" };
+    {        
+        public string currentType="";
+        //private string[] wordTypes = { "Variable declaration", "Function declaration", "Variable modificator", "Function modificator", "Content reference", "Operator", "Name" };
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            this.AutoSize = true;
             this.ContextMenuStrip = new ContextMenuStrip();
             ToolStripComboBox wordTypeSelector = new ToolStripComboBox();
-            wordTypeSelector.Name = "wordTypeSelector_";
-            wordTypeSelector.Items.AddRange(wordTypes);
+            //this.ContextMenuStrip.AutoSize = true;
+            //wordTypeSelector.AutoSize = true;
+            wordTypeSelector.Name = "wordTypeSelector";
+            wordTypeSelector.Items.AddRange(new KeywordsArrays().WordTypes());
             this.ContextMenuStrip.Items.Add(wordTypeSelector);
             wordTypeSelector.SelectedIndexChanged += ChangeFontColor;
             Parent.Controls.Add(this);

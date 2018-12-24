@@ -12,7 +12,6 @@ using System.IO;
 
 namespace US4
 {
-    
     public partial class AssociationsSet : Form
     {
         private string codeLine;
@@ -22,13 +21,8 @@ namespace US4
         //private ToolStripComboBox wordTypeSelector = new ToolStripComboBox();
         private Font codeLineLabels;
         
-        public List<associationsStruct> associationsList = new List<associationsStruct>();
-        associationsStruct tmpAssociationStruct;
-
-
-
-
-
+        public List<AssociationsStruct> associationsList = new List<AssociationsStruct>();
+        AssociationsStruct tmpAssociationStruct;
 
         public AssociationsSet(StreamReader inputDocument, string codeLine)
         {
@@ -66,9 +60,13 @@ namespace US4
 
         private void AssociationsSet_FormClosing(object sender, FormClosingEventArgs e)
         {
+            associationsList.Clear();
             foreach (ControlLabel cl in associationTypesLabels)
             {
-                tmpAssociationStruct = new associationsStruct();
+                tmpAssociationStruct = new AssociationsStruct();
+                tmpAssociationStruct.Type = cl.currentType;
+                tmpAssociationStruct.US_Name = cl.Text.Trim();
+                associationsList.Add(tmpAssociationStruct);
                 //associationsList.Add(); 
             }
         }
@@ -78,62 +76,5 @@ namespace US4
             this.Close();
         }
     }
-    public struct associationsStruct
-    {
-        private string includeLibrary;
-        public string IncludeLibrary
-        {
-            get { return includeLibrary; }
-            set { includeLibrary = value; }
-        }
-
-        private string type;
-        public string Type
-        {
-            get { return type; }
-            set { type = value; }
-        }
-
-        private string _US_Names;
-        public string US_Names
-        {
-            get { return _US_Names; }
-            set { _US_Names = value; }
-        }
-
-        private string _CPP_Association;
-        public string CPP_Association
-        {
-            get { return _CPP_Association; }
-            set { _CPP_Association = value; }
-        }
-
-        private string inHeader;
-        public string InHeader
-        {
-            get { return inHeader; }
-            set { inHeader = value; }
-        }
-
-        private string isChildOf;
-        public string IsChildOf
-        {
-            get { return isChildOf; }
-            set { isChildOf = value; }
-        }
-
-
-
-        public associationsStruct(string _includeLibrary, string _type, string __US_Names, string __CPP_Association, string _inHeader, string _isChildOf)
-       {
-            includeLibrary = _includeLibrary;
-            type = _type;
-            _US_Names = __US_Names;
-            _CPP_Association = __CPP_Association;
-            inHeader = _inHeader;
-            isChildOf = _isChildOf;
-
-            
-       }
-    };
+    
 }
