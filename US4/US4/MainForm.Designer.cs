@@ -45,9 +45,15 @@
             this.lbl_UdkPath = new System.Windows.Forms.Label();
             this.UDKPathBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.UE4PathBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.gBox_Log = new System.Windows.Forms.GroupBox();
+            this.rtb_Log = new System.Windows.Forms.RichTextBox();
+            this.cb_OnlyNeededByLevel = new System.Windows.Forms.CheckBox();
+            this.txt_LevelFilePath = new System.Windows.Forms.TextBox();
+            this.fd_OpenLevelFile = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.gBox_Log.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -65,7 +71,6 @@
             // rb_MigrateContent
             // 
             this.rb_MigrateContent.AutoSize = true;
-            this.rb_MigrateContent.Enabled = false;
             this.rb_MigrateContent.Location = new System.Drawing.Point(7, 66);
             this.rb_MigrateContent.Name = "rb_MigrateContent";
             this.rb_MigrateContent.Size = new System.Drawing.Size(108, 17);
@@ -73,6 +78,7 @@
             this.rb_MigrateContent.TabStop = true;
             this.rb_MigrateContent.Text = "Content Migration";
             this.rb_MigrateContent.UseVisualStyleBackColor = true;
+            this.rb_MigrateContent.CheckedChanged += new System.EventHandler(this.rb_MigrateContent_CheckedChanged);
             // 
             // rb_GameplayConvert
             // 
@@ -133,6 +139,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txt_LevelFilePath);
+            this.groupBox2.Controls.Add(this.cb_OnlyNeededByLevel);
             this.groupBox2.Controls.Add(this.btn_SelectUE4Path);
             this.groupBox2.Controls.Add(this.txtBox_UE4Path);
             this.groupBox2.Controls.Add(this.lbl_UE4Path);
@@ -141,7 +149,7 @@
             this.groupBox2.Controls.Add(this.lbl_UdkPath);
             this.groupBox2.Location = new System.Drawing.Point(174, 50);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(437, 153);
+            this.groupBox2.Size = new System.Drawing.Size(437, 131);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Converter Setup";
@@ -202,11 +210,60 @@
             this.lbl_UdkPath.TabIndex = 0;
             this.lbl_UdkPath.Text = "UDKPath:";
             // 
+            // gBox_Log
+            // 
+            this.gBox_Log.Controls.Add(this.rtb_Log);
+            this.gBox_Log.Location = new System.Drawing.Point(35, 187);
+            this.gBox_Log.Name = "gBox_Log";
+            this.gBox_Log.Size = new System.Drawing.Size(576, 208);
+            this.gBox_Log.TabIndex = 4;
+            this.gBox_Log.TabStop = false;
+            this.gBox_Log.Text = "Log";
+            // 
+            // rtb_Log
+            // 
+            this.rtb_Log.Location = new System.Drawing.Point(18, 20);
+            this.rtb_Log.Name = "rtb_Log";
+            this.rtb_Log.Size = new System.Drawing.Size(539, 165);
+            this.rtb_Log.TabIndex = 0;
+            this.rtb_Log.Text = "";
+            // 
+            // cb_OnlyNeededByLevel
+            // 
+            this.cb_OnlyNeededByLevel.AccessibleName = "ch_OnlyNeededByLevel";
+            this.cb_OnlyNeededByLevel.AutoSize = true;
+            this.cb_OnlyNeededByLevel.Location = new System.Drawing.Point(10, 72);
+            this.cb_OnlyNeededByLevel.Name = "cb_OnlyNeededByLevel";
+            this.cb_OnlyNeededByLevel.Size = new System.Drawing.Size(120, 17);
+            this.cb_OnlyNeededByLevel.TabIndex = 6;
+            this.cb_OnlyNeededByLevel.Text = "Migrate by Level file";
+            this.cb_OnlyNeededByLevel.UseVisualStyleBackColor = true;
+            this.cb_OnlyNeededByLevel.Visible = false;
+            this.cb_OnlyNeededByLevel.CheckedChanged += new System.EventHandler(this.cb_OnlyNeededByLevel_CheckedChanged);
+            // 
+            // txt_LevelFilePath
+            // 
+            this.txt_LevelFilePath.AccessibleName = "txt_LevelFilePath";
+            this.txt_LevelFilePath.Enabled = false;
+            this.txt_LevelFilePath.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txt_LevelFilePath.Location = new System.Drawing.Point(136, 70);
+            this.txt_LevelFilePath.Name = "txt_LevelFilePath";
+            this.txt_LevelFilePath.Size = new System.Drawing.Size(207, 20);
+            this.txt_LevelFilePath.TabIndex = 7;
+            this.txt_LevelFilePath.Text = "Select level file";
+            this.txt_LevelFilePath.Visible = false;
+            this.txt_LevelFilePath.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txt_LevelFilePath_MouseClick);
+            // 
+            // fd_OpenLevelFile
+            // 
+            this.fd_OpenLevelFile.FileOk += new System.ComponentModel.CancelEventHandler(this.fd_OpenLevelFile_FileOk);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 426);
+            this.Controls.Add(this.gBox_Log);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_StartConvert);
             this.Controls.Add(this.groupBox1);
@@ -220,6 +277,7 @@
             this.menuStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.gBox_Log.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,6 +302,11 @@
         private System.Windows.Forms.TextBox txtBox_UE4Path;
         private System.Windows.Forms.Label lbl_UE4Path;
         private System.Windows.Forms.FolderBrowserDialog UE4PathBrowser;
+        private System.Windows.Forms.GroupBox gBox_Log;
+        private System.Windows.Forms.RichTextBox rtb_Log;
+        private System.Windows.Forms.TextBox txt_LevelFilePath;
+        private System.Windows.Forms.CheckBox cb_OnlyNeededByLevel;
+        private System.Windows.Forms.OpenFileDialog fd_OpenLevelFile;
     }
 }
 

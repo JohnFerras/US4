@@ -10,6 +10,7 @@ namespace US4
 {
     class MainWorker
     {
+        public MainForm globalForm;
         private List<AssociationsStruct> associationsList = new List<AssociationsStruct>();
         private StreamReader inputDocument;
         private StreamWriter outputDocumentH;
@@ -24,6 +25,7 @@ namespace US4
 
         public void OpenFile(string fileName)
         {
+            globalForm.PrintLog("Gameplay: Reading file " + fileName);
             //openFileDialog.Filter = "uc files (*.uc)|*.txt|All files (*.*)|*.*";
             //openFileDialog.FilterIndex = 2;
             //openFileDialog.RestoreDirectory = true;
