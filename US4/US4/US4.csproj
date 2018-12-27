@@ -56,6 +56,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ContentWorker.cs" />
+    <Compile Include="CurrentTextInMemory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurrentTextInMemory.Designer.cs">
+      <DependentUpon>CurrentTextInMemory.cs</DependentUpon>
+    </Compile>
     <Compile Include="KeywordsArrays.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -71,6 +77,9 @@
     <Compile Include="XMLRequests.cs" />
     <EmbeddedResource Include="AssociationsSet.resx">
       <DependentUpon>AssociationsSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CurrentTextInMemory.resx">
+      <DependentUpon>CurrentTextInMemory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

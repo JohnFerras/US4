@@ -24,7 +24,7 @@ namespace US4
         public List<AssociationsStruct> associationsList = new List<AssociationsStruct>();
         AssociationsStruct tmpAssociationStruct;
 
-        public AssociationsSet(StreamReader inputDocument, string codeLine)
+        public AssociationsSet(string codeLine)
         {
             
             InitializeComponent();

@@ -8,7 +8,16 @@ namespace US4
 {
     public class KeywordsArrays
     {
-        private string[] wordTypes = { "Variable declaration", "Function declaration", "Variable modificator", "Function modificator", "Content reference", "Operator", "Name" };
+        private string[] wordTypes = { "Variable declaration",
+                                       "Function declaration",
+                                       "Variable modificator",
+                                       "Function modificator",
+                                       "Line end",
+                                       "Content reference",
+                                       "Operator",
+                                       "Name",
+                                       "Class declaration",
+                                       "Extends operator" };
 
         public string[] WordTypes()
         {

@@ -19,9 +19,11 @@ namespace US4
 
         private XMLRequests _XMLRequests = new XMLRequests();
         private XDocument _XMLAssociations;
-        private XElement tmpXElement;
+        //private XElement tmpXElement;
         private string currentLine;
         private AssociationsSet associationsSet;
+        private string tmpFormatLine;
+        private string currentFormat;
 
         public void OpenFile(string fileName)
         {
@@ -53,17 +55,36 @@ namespace US4
         private void CodeReading()
         {
             if ((currentLine = inputDocument.ReadLine()) != null)
-            {
+            {                
                 LineAnalys(currentLine);
             }
 
         }
+        private void AppendNewLine()
+        {
+            currentLine += " "+ inputDocument.ReadLine();
+            LineAnalys(currentLine);
+        }
         private void LineAnalys(string line)
         {
-            string[] tmpStringArray = line.Split(' ');
+            List<string> tmpStringArray = line.Split(' ').ToList<string>();
             string tmpString;
             bool findedInAssociations = false;
-            for (int i = 0; i < tmpStringArray.Length; i++)
+            for (int i = 0; i < tmpStringArray.Count; i++)
+            {
+                if(tmpStringArray[i]=="")
+                {
+                    tmpStringArray.Remove(tmpStringArray[i]);
+                }
+                else
+                {
+                    tmpStringArray[i]=tmpStringArray[i].Trim();
+                }
+            }
+
+            currentFormat = "";
+
+            for (int i = 0; i < tmpStringArray.Count; i++)
             {
                 tmpString = tmpStringArray[0];
                 if (i > 0)
@@ -73,20 +94,63 @@ namespace US4
                         tmpString += tmpStringArray[k];
                     }
                 }
-                foreach (XElement xElem in _XMLAssociations.Root.Elements())
+                foreach (XElement xElem in _XMLAssociations.Root.Elements("DictionaryElem"))
                 {
-                    if (xElem.Attributes("inText").Count() > 0)
+                    if (xElem.Attributes("_US_Name").Count() > 0)
                     {
-                        if (xElem.Attribute("inText").Value == tmpString)
+                        if (xElem.Attribute("_US_Name").Value == tmpString)
                         {
                             findedInAssociations = true;
+                            currentFormat += xElem.Attribute("type").Value;
+                            break;
                         }
                     }
+                }
+                if (!findedInAssociations)
+                {
+                    currentFormat += ">Name?>";
+                }
+            }
+            
+            if(currentFormat!="")
+            {
+                if (currentFormat.Contains(";") || currentFormat.Contains("Class declaration"))
+                {
+                    uint countInCurrentFormat = 0;
+                    uint countInAssociations = 0;
+                    foreach (string elem in currentFormat.Split(' '))
+                    {
+                        if (elem == ">Name?>")
+                        {
+                            countInCurrentFormat++;
+                        }
+                    }
+
+                    foreach (XElement elem in _XMLAssociations.Root.Elements("LineFormat").Where(e => e.Attribute("Format").Value.Contains(">Name?>")))
+                    {
+                        foreach (string elem2 in elem.Attribute("Format").Value.Split(' '))
+                        {
+                            if (elem2 == ">Name?>")
+                            {
+                                countInAssociations++;
+                            }
+                        }
+                    }
+                    if (countInAssociations != countInCurrentFormat)
+                    {
+                        associationsSet = new AssociationsSet(line);
+                        associationsSet.FormClosed += GetTypesCode;
+                        associationsSet.ShowDialog();
+                    }
+                }
+                else
+                {
+
                 }
             }
             if (!findedInAssociations)
             {
-                associationsSet = new AssociationsSet(inputDocument, line);
+                associationsSet = new AssociationsSet(line);
                 associationsSet.FormClosed += GetTypesCode;
                 associationsSet.ShowDialog();
 
@@ -94,20 +158,27 @@ namespace US4
         }
         private void GetTypesCode(Object sender, EventArgs e)
         {
+            associationsSet.FormClosed -= GetTypesCode;
             associationsList.Clear();
             associationsList = associationsSet.associationsList;
             WriteInDictionary();
         }
         private void WriteInDictionary()
         {
+            tmpFormatLine = "";
             foreach (AssociationsStruct aStruct in associationsList)
             {
-                tmpXElement = _XMLRequests.F_newXElement("DictionaryElem", new Dictionary<string, string>() { { "includeLibrary", aStruct.IncludeLibrary },
+                _XMLAssociations.Root.Add(_XMLRequests.F_newXElement("DictionaryElem", new Dictionary<string, string>() { { "includeLibrary", aStruct.IncludeLibrary },
                                                                                                               { "type", aStruct.Type},
                                                                                                               { "_US_Name", aStruct.US_Name},
                                                                                                               { "_CPP_Association", aStruct.CPP_Association},
-                                                                                                              { "inHeader", aStruct.InHeader} });
+                                                                                                            { "inHeader", aStruct.InHeader} }));
+                tmpFormatLine+=aStruct.Type+" ";
             }
+
+            tmpFormatLine = ">"+tmpFormatLine.Trim();
+            _XMLAssociations.Root.Add(new XElement("LineFormat",new XAttribute("Format",tmpFormatLine)));
+            _XMLAssociations.Save("XMLAssociations.xml");
 
 
         }

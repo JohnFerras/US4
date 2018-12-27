@@ -9,49 +9,12 @@ namespace US4
     public struct AssociationsStruct
     {
         private string includeLibrary;
-        public string IncludeLibrary
-        {
-            get { return includeLibrary; }
-            set { includeLibrary = value; }
-        }
-
         private string type;
-        public string Type
-        {
-            get { return type; }
-            set { type = value; }
-        }
-
         private string _US_Name;
-        public string US_Name
-        {
-            get { return _US_Name; }
-            set { _US_Name = value; }
-        }
-
         private string _CPP_Association;
-        public string CPP_Association
-        {
-            get { return _CPP_Association; }
-            set { _CPP_Association = value; }
-        }
-
         private string inHeader;
-        public string InHeader
-        {
-            get { return inHeader; }
-            set { inHeader = value; }
-        }
-
         private string isChildOf;
-        public string IsChildOf
-        {
-            get { return isChildOf; }
-            set { isChildOf = value; }
-        }
-
-
-
+        
         public AssociationsStruct(string _includeLibrary, string _type, string __US_Name, string __CPP_Association, string _inHeader, string _isChildOf)
         {
             includeLibrary = _includeLibrary;
@@ -61,10 +24,75 @@ namespace US4
             inHeader = _inHeader;
             isChildOf = _isChildOf;
         }
+
+        public string IncludeLibrary
+        {
+            get
+            {
+                if (includeLibrary != null)
+                    return includeLibrary;
+                else
+                    return "";
+            }
+            set { includeLibrary = value; }
+        }
+        public string Type
+        {
+            get
+            {
+                if (type != null)
+                    return type;
+                else
+                    return "";
+            }
+            set { type = value; }
+        }
+        public string US_Name
+        {
+            get
+            {
+                if (_US_Name != null)
+                    return _US_Name;
+                else
+                    return "";
+            }
+            set { _US_Name = value; }
+        }
+        public string CPP_Association
+        {
+            get
+            {
+                if (_CPP_Association != null)
+                    return _CPP_Association;
+                else
+                    return "";
+            }
+            set { _CPP_Association = value; }
+        }
+        public string InHeader
+        {
+            get
+            {
+                if (inHeader != null)
+                    return inHeader;
+                else
+                    return "";
+            }
+            set { inHeader = value; }
+        }
+        public string IsChildOf
+        {
+            get
+            {
+                if (isChildOf != null)
+                    return isChildOf;
+                else
+                    return "";
+            }
+            set { isChildOf = value; }
+        }
     };
     
-    class Structures
-    {
-        
-    }
+    
+    
 }
